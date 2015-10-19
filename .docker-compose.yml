@@ -1,0 +1,9 @@
+node.dev:
+    image: node:4-wheezy
+    container_name: node.dev
+    working_dir: /app
+    volumes:
+        - /shared/node.dev/:/app
+    ports:
+        - "3000:3000"
+    tty: true
