@@ -19657,24 +19657,29 @@
 	    getInitialState: function getInitialState() {
 	        return { messages: [] };
 	    },
-	    addMessage: function addMessage() {
+	    addMessage: function addMessage(message) {
+	        this.state.messages.unshift(message);
+	        this.forceUpdate();
+	    },
+	    initWebSocket: function initWebSocket() {
 	        var _this = this;
 
-	        var i = 0;
-	        setInterval(function () {
-	            var message = {
-	                user: {
-	                    name: 'Username'
-	                },
-	                text: 'Some text here i = ' + i
-	            };
-	            i++;
-	            _this.state.messages.unshift(message);
-	            _this.forceUpdate();
-	        }, 1000);
+	        var ws = new WebSocket('ws://' + document.location.host + '/ws');
+	        ws.onopen = function (event) {
+	            return console.debug('WebSocket: opened');
+	        };
+	        ws.onclose = function (event) {
+	            return console.debug('WebSocket: closed');
+	        };
+	        ws.onerror = function (event) {
+	            return console.debug('WebSocket: error');
+	        };
+	        ws.onmessage = function (event) {
+	            return _this.addMessage(JSON.parse(event.data));
+	        };
 	    },
 	    componentDidMount: function componentDidMount() {
-	        this.addMessage();
+	        this.initWebSocket();
 	    },
 	    render: function render() {
 	        var messageNodes = this.state.messages.map(function (message) {

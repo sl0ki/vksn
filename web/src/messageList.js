@@ -5,22 +5,19 @@ var MessageList = React.createClass({
     getInitialState: function() {
         return {messages: []};
     },
-    addMessage: function() {
-        var i = 0;
-        setInterval(() => {
-            var message = {
-                user: {
-                    name: 'Username'
-                },
-                text: 'Some text here i = ' + i
-            };
-            i++;
-            this.state.messages.unshift(message);
-            this.forceUpdate();
-        }, 1000);
+    addMessage: function(message) {
+        this.state.messages.unshift(message);
+        this.forceUpdate();
+    },
+    initWebSocket: function() {
+        var ws = new WebSocket(`ws://${document.location.host}/ws`);
+        ws.onopen = (event) => console.debug('WebSocket: opened');
+        ws.onclose = (event) => console.debug('WebSocket: closed');
+        ws.onerror = (event) => console.debug('WebSocket: error');
+        ws.onmessage = (event) => this.addMessage(JSON.parse(event.data));
     },
     componentDidMount: function() {
-        this.addMessage();
+        this.initWebSocket();
     },
     render: function() {
         var messageNodes = this.state.messages.map((message) => {
