@@ -10,11 +10,10 @@ var MessageList = React.createClass({
         this.forceUpdate();
     },
     initWebSocket: function() {
-        //var ws = new WebSocket(`ws://${document.location.host}/ws`);
+        // var ws = new WebSocket(`ws://${document.location.host}/ws`);
         var ws = new WebSocket('ws://127.0.0.1:3001/ws');
-        ws.onopen = (event) => console.debug('WebSocket: opened');
-        //ws.onclose = (event) => setTimeout(() => this.connect()}, 1000);
-        ws.onerror = (event) => console.debug('WebSocket: error');
+        ws.onopen = (event) => console.debug('WebSocket: connected');
+        ws.onclose = (event) => setTimeout(() => this.initWebSocket(), 3000);
         ws.onmessage = (event) => this.addMessage(JSON.parse(event.data));
 
     },

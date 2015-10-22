@@ -51,16 +51,17 @@ def receive(pkt):
 		if "updates" not in obj: return
 		for item in obj["updates"]:
 			if item[0] == 4:
-				m_id, u_id, time, msg = item[1], item[3], item[4], item[6]
+				m_id, flag, u_id, time, msg = item[1], item[2], item[3], item[4], item[6]
 				if (m_id in messages): continue
 				message = {
 					'user': get_user_by_id(u_id),
 					'text': msg,
 					'time': time,
+					'type': "OUTBOX" if (int(flag)&2 != 0) else "INBOX"
 				}
 				messages.append(m_id)
 				#print message
-				print message["user"]["name"] + " ==> " + message["text"]
+				print message["type"]+": "+message["user"]["name"]+" -- " + message["text"] 
 				send_message(message)
 
 
