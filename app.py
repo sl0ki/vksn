@@ -1,6 +1,8 @@
 from tornado import websocket, web, ioloop
 from scapy.all import sniff
 from threading import Thread
+import json
+import urllib2
 
 clients = []
 
@@ -31,23 +33,44 @@ app = web.Application([
     (r'/(.*)', web.StaticFileHandler, {'path': './web/dist/'}),
 ])
 
-def send_message(raw='Empty'):
+def send_message(message):
     for client in clients:
         # client.write_message('Test Hi ;)')
-        client.write_message({
-            'user': {
-                'name': 'Username',
-                'raw': raw
-            },
-            'text': 'Some text here i = '
-        })
+        client.write_message(message)
 
-def parse_packg(pack):
-    print pack.show()
-    # send_message('Good')
+def get_name_by_id(id):
+	get_name = json.loads(urllib2.urlopen('https://api.vk.com/method/getProfiles?uids='+str(id)).readlines()[0])
+	friend_name = get_name["response"][0]["first_name"]+' '+get_name["response"][0]["last_name"]
+	return friend_name
+
+def parse_packg(pkt):
+	if hasattr(pkt, "load") and '{"ts":' in pkt.load and '"updates"' in pkt.load:
+		#print pkt.load.split("\r\n\r\n")[1][:-2]
+		try:
+			obj = json.loads(pkt.load.split("\r\n\r\n")[1][:-2])
+		except:
+			print "Cant parse JSON"
+			obj = {"updates": []}
+		for item in obj[u'updates']:
+			#print item
+			if item[0] == 4:
+				num, uid, time, msg = item[1], item[3], item[4], item[6]
+				message = {
+					'user': {
+						'id': uid,
+						'name': get_name_by_id(uid)
+					},
+					'text': msg,
+					'time': time,
+				}
+				print message
+				send_message(message)
+
+
+
 
 def start_sniff():
-    sniff(iface='eth0', prn=parse_packg, filter="port 80")
+    sniff(iface='wlan0', prn=parse_packg, filter="tcp and port 80")
     pass
 
 if __name__ == '__main__':
