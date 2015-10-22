@@ -23,14 +23,9 @@ class SocketHandler(websocket.WebSocketHandler):
         if self in clients:
             clients.remove(self)
 
-class IndexHandler(web.RequestHandler):
-    def get(self):
-        self.render('./web/dist/index.html')
-
 app = web.Application([
-    (r'/', IndexHandler),
     (r'/ws', SocketHandler),
-    (r'/(.*)', web.StaticFileHandler, {'path': './web/dist/'}),
+    (r'/(.*)', web.StaticFileHandler, {'path': './web/dist/', "default_filename": "index.html"}),
 ])
 
 def send_message(message):
