@@ -19676,14 +19676,22 @@
 	        this.forceUpdate();
 	    },
 	    initWebSocket: function initWebSocket() {
+	        this.addMessage({
+	            user: {
+	                id: 'dscdc',
+	                name: "Privet"
+	            },
+	            text: "Test text"
+	        });
 	        // var ws = new WebSocket(`ws://${document.location.host}/ws`);
 	        // ws.onopen = (event) => console.debug('WebSocket: opened');
 	        // ws.onclose = (event) => console.debug('WebSocket: closed');
 	        // ws.onerror = (event) => console.debug('WebSocket: error');
 	        // ws.onmessage = (event) => this.addMessage(JSON.parse(event.data));
-
 	    },
 	    componentDidMount: function componentDidMount() {
+	        this.initWebSocket();
+	        this.initWebSocket();
 	        this.initWebSocket();
 	    },
 	    render: function render() {
@@ -19737,7 +19745,7 @@
 
 
 	// module
-	exports.push([module.id, "body  {\n    background-color: grey;\n}\n", ""]);
+	exports.push([module.id, "body  {\n    background-color: #f0f2f5;;\n}\n\n.messageList {\n    width: 100%;\n}\n\n.message {\n    max-width: 400px;\n    margin: 0 auto;\n    background-color: white;\n    padding: 25px 30px 30px;\n    border-radius: 2px;\n    box-shadow: 0 1px 2px rgba(6, 33, 63, 0.13);\n    margin-top: 20px;\n    color: #2b2f33;\n}\n", ""]);
 
 	// exports
 
