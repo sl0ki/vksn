@@ -10,29 +10,21 @@ var MessageList = React.createClass({
         this.forceUpdate();
     },
     initWebSocket: function() {
-        this.addMessage({
-            user: {
-                id: 'dscdc',
-                name: "Privet"
-            },
-            text: "Test text"
-        });
-        // var ws = new WebSocket(`ws://${document.location.host}/ws`);
-        // ws.onopen = (event) => console.debug('WebSocket: opened');
-        // ws.onclose = (event) => console.debug('WebSocket: closed');
-        // ws.onerror = (event) => console.debug('WebSocket: error');
-        // ws.onmessage = (event) => this.addMessage(JSON.parse(event.data));
+        //var ws = new WebSocket(`ws://${document.location.host}/ws`);
+        var ws = new WebSocket('ws://127.0.0.1:3001/ws');
+        ws.onopen = (event) => console.debug('WebSocket: opened');
+        //ws.onclose = (event) => setTimeout(() => this.connect()}, 1000);
+        ws.onerror = (event) => console.debug('WebSocket: error');
+        ws.onmessage = (event) => this.addMessage(JSON.parse(event.data));
 
     },
     componentDidMount: function() {
-        this.initWebSocket();
-        this.initWebSocket();
         this.initWebSocket();
     },
     render: function() {
         var messageNodes = this.state.messages.map((message) => {
             return (
-                <Message user={message.user} text={message.text}/>
+                <Message message={message} />
             );
         });
         return(
