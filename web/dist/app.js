@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/root/vksn/web/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/root/vksn/web/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/app/vk_sniff/web/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/app/vk_sniff/web/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	'use strict';
 
@@ -71,7 +71,7 @@
 	// console.log(Message);
 	// React.renderComponent(<Message />, document.getElementById('app'));
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/root/vksn/web/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "app.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/app/vk_sniff/web/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "app.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 1 */
@@ -19624,7 +19624,7 @@
 /* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/root/vksn/web/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/root/vksn/web/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/app/vk_sniff/web/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/app/vk_sniff/web/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	"use strict";
 
@@ -19636,29 +19636,39 @@
 	    render: function render() {
 	        return React.createElement(
 	            "div",
-	            { className: "message" },
+	            { className: "message show" },
+	            React.createElement("img", { className: "photo", src: this.props.message.user.photo }),
 	            React.createElement(
-	                "div",
-	                { className: "author" },
-	                this.props.user.name
+	                "span",
+	                { className: "type" },
+	                this.props.message.type == 'INBOX' ? "↑" : "↓"
 	            ),
 	            React.createElement(
 	                "div",
-	                { className: "text" },
-	                this.props.text
+	                { className: "content" },
+	                React.createElement(
+	                    "a",
+	                    { className: "author", target: "_blank", href: "http://vk.com/id" + this.props.message.user.id },
+	                    this.props.message.user.name
+	                ),
+	                React.createElement(
+	                    "div",
+	                    { className: "text" },
+	                    this.props.message.text
+	                )
 	            )
 	        );
 	    }
 	});
 	module.exports = Message;
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/root/vksn/web/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "message.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/app/vk_sniff/web/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "message.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/root/vksn/web/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/root/vksn/web/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/app/vk_sniff/web/node_modules/react-hot-loader/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/app/vk_sniff/web/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
 	'use strict';
 
@@ -19679,15 +19689,6 @@
 	        var _this = this;
 
 	        var ws = new WebSocket('ws://' + document.location.host + '/ws');
-	        ws.onopen = function (event) {
-	            return console.debug('WebSocket: opened');
-	        };
-	        ws.onclose = function (event) {
-	            return console.debug('WebSocket: closed');
-	        };
-	        ws.onerror = function (event) {
-	            return console.debug('WebSocket: error');
-	        };
 	        ws.onmessage = function (event) {
 	            return _this.addMessage(JSON.parse(event.data));
 	        };
@@ -19697,7 +19698,7 @@
 	    },
 	    render: function render() {
 	        var messageNodes = this.state.messages.map(function (message) {
-	            return React.createElement(Message, { user: message.user, text: message.text });
+	            return React.createElement(Message, { key: message.id, message: message });
 	        });
 	        return React.createElement(
 	            'div',
@@ -19709,7 +19710,7 @@
 
 	module.exports = MessageList;
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/root/vksn/web/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "messageList.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/app/vk_sniff/web/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "messageList.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 160 */
@@ -19746,7 +19747,7 @@
 
 
 	// module
-	exports.push([module.id, "body  {\n    background-color: #f0f2f5;;\n}\n\n.messageList {\n    width: 100%;\n}\n\n.message {\n    max-width: 400px;\n    margin: 0 auto;\n    background-color: white;\n    padding: 25px 30px 30px;\n    border-radius: 2px;\n    box-shadow: 0 1px 2px rgba(6, 33, 63, 0.13);\n    margin-top: 20px;\n    color: #2b2f33;\n}\n", ""]);
+	exports.push([module.id, "body  {\n    background-color: #f0f2f5;\n    font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif;\n}\n\n.messageList {\n    width: 100%;\n}\n\n.message {\n    position: relative;\n    max-width: 400px;\n    min-height: 50px;\n    margin: 0 auto;\n    background-color: white;\n    padding: 15px;\n    border-radius: 2px;\n    box-shadow: 0 1px 2px rgba(6, 33, 63, 0.13);\n    margin-top: 15px;\n    color: #2b2f33;\n    opacity: 1;\n    transition: all .5s;\n}\n\n.message.hide {\n    margin-top: -80px;\n    opacity: 0;\n}\n\n.message .photo {\n    position: absolute;\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n}\n\n.message .type {\n    position: absolute;\n    right: 10px;\n    top: 10px;\n    font-weight: bold;\n    color: #B4241B;\n    transform: rotate(15deg);\n}\n\n.message .content {\n    padding-left: 70px;\n}\n\n.message .text {\n    font-size: 15px;\n}\n\n.author {\n    color: #496F9A;;\n    font-size: 11px;\n    font-weight: bold;\n    text-decoration: none;\n    margin-bottom: 7px;\n    display: block;\n}\n", ""]);
 
 	// exports
 

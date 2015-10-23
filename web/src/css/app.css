@@ -1,5 +1,6 @@
 body  {
-    background-color: #f0f2f5;;
+    background-color: #f0f2f5;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 .messageList {
@@ -7,24 +8,54 @@ body  {
 }
 
 .message {
+    position: relative;
     max-width: 400px;
+    min-height: 50px;
     margin: 0 auto;
     background-color: white;
-    padding: 25px 30px 30px;
+    padding: 15px;
     border-radius: 2px;
     box-shadow: 0 1px 2px rgba(6, 33, 63, 0.13);
-    margin-top: 20px;
+    margin-top: 15px;
     color: #2b2f33;
+    opacity: 1;
+    transition: all .5s;
+}
+
+.message.hide {
+    margin-top: -80px;
+    opacity: 0;
 }
 
 .message .photo {
+    position: absolute;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    float: left;
+}
+
+.message .type {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-weight: bold;
+    color: #B4241B;
+    transform: rotate(15deg);
+}
+
+.message .content {
+    padding-left: 70px;
+}
+
+.message .text {
+    font-size: 15px;
 }
 
 .author {
-    color: red;
+    color: #496F9A;;
     font-size: 11px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 7px;
+    display: block;
 }
