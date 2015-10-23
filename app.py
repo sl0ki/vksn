@@ -1,18 +1,20 @@
 from tornado import websocket, web, ioloop
 from scapy.all import sniff
-from scapy.layers import http
+from scapy_http import http
 from threading import Thread
 import json
-import urllib2
 from urlparse import parse_qs, urlparse
+from random import randint
 import requests
+
+#   -- vk.com sniffer  --
 
 users_cache = {}
 
 def get_user_by_id(id):
 	if id in users_cache:
 		return users_cache[id]
-	else: 
+	else:
 		params = {
 			"fields": "photo_100",
 			"user_ids": id
@@ -54,6 +56,7 @@ def receive(pkt):
 				m_id, flag, u_id, time, msg = item[1], item[2], item[3], item[4], item[6]
 				if (m_id in messages): continue
 				message = {
+					'id': randint(0,9999999),
 					'user': get_user_by_id(u_id),
 					'text': msg,
 					'time': time,
@@ -61,16 +64,16 @@ def receive(pkt):
 				}
 				messages.append(m_id)
 				#print message
-				print message["type"]+": "+message["user"]["name"]+" -- " + message["text"] 
+				print message["type"]+": "+message["user"]["name"]+" -- "+message["text"]
 				send_message(message)
-
-
 
 
 def start_sniff():
     sniff(iface='wlan0', prn=receive, filter="tcp and port 80")
     pass
 
+
+#   -- Socket Web Server  --
 
 clients = []
 
@@ -101,7 +104,7 @@ def send_message(message):
         client.write_message(message)
 
 if __name__ == '__main__':
-	app.listen(3001)
+	app.listen(3000)
 	sniffer = Thread(target = start_sniff)
 	sniffer.daemon = True
 	sniffer.start()
